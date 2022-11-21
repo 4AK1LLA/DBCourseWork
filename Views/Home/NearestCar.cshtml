@@ -1,0 +1,98 @@
+﻿@using CarRental.Models
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<main class="main">
+    <section class="home section" id="home">
+        <div class="home__container container grid">
+            <div class="home__data">
+                <span class="home__greeting">Вас вітає пункт прокату розкішних авто</span>
+                <h1 class="home__name">Kyiv Luxury Rentals</h1>
+                <div class="home__buttons">
+                    <a href="/Home/NearestCar" class="button button--ghost">Найближче вільне авто</a>
+                    <a href="/Home/Index#all_cars" class="button">Всі авто</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nearest_car section" id="nearest_car">
+        <h2 class="section__title">Пошук найближчого вільного авто</h2>
+        <form action="" class="nearest_car__form">
+            <div class="nearest_car__form-div nearest_car__form-area">
+                <label for="" class="nearest_car__form-tag">Виберіть район</label>
+                <select name="areas" class="nearest_car__form-select" onchange="_onSelectChange(this.value)">
+                    <option selected disabled value="0"></option>
+                    @foreach (var area in ViewBag.Areas)
+                    {
+                        if (area.AreaId == @Model)
+                        {
+                            if (area.Name == area.City)
+                            {
+                                <option selected value="@area.AreaId">м. @area.City</option>
+                            }
+                            else
+                            {
+                                <option selected value="@area.AreaId">@area.Name, м. @area.City</option>
+                            }
+                        }
+                        else
+                        {
+                            if (area.Name == area.City)
+                            {
+                                <option value="@area.AreaId">м. @area.City</option>
+                            }
+                            else
+                            {
+                                <option value="@area.AreaId">@area.Name, м. @area.City</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+        </form>
+        @if (ViewBag.NearestCars.Count == 0)
+        {
+            <div class="nearest_car__areas">
+                <img src="https://dom.riastatic.com/css/images/common/kiev_district.png" alt="" class="nearest_car__areas-img">
+            </div>
+        }
+        else
+        {
+            <h3 class="nearest_car__title">Виберіть вільне авто в цьому районі для оформлення замовлення</h3>
+            <div class="nearest_car__container">
+                @foreach (Car findedCar in ViewBag.NearestCars)
+                {
+                    <div class="nearest_car__card">
+                        <h3 class="nearest_car__card-title">
+                            <span onclick="_onSpanClick(@findedCar.CarId)"
+                          class="nearest_car__card-title-pointer">
+                                @findedCar.Brand @findedCar.Model
+                                <i class='bx bx-right-arrow-alt nearest_car__card-title_icon'></i>
+                            </span>
+                        </h3>
+                        <img class="nearest_car__card-img" src="@findedCar.Photo.URL">
+                        <div class="nearest_car__card-info">
+                            <div class="nearest_car__card-speed">
+                                <i class="bi bi-speedometer nearest_car__card-icon"></i>
+                                <span class="nearest_car__card-span">@findedCar.MaxSpeed км/г</span>
+                            </div>
+                            <div class="nearest_car__card-year">
+                                <i class='bx bxs-calendar nearest_car__card-icon'></i>
+                                <span class="nearest_car__card-span">@findedCar.Year р.</span>
+                            </div>
+                            <div class="nearest_car__card-price">
+                                <i class='bx bx-purchase-tag-alt nearest_car__card-icon'></i>
+                                <span class="nearest_car__card-span">@findedCar.Price $</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </section>
+</main>
+<script type="text/javascript">
+    _onSelectChange = (areaId) => window.location.href = '/Home/NearestCar/' + areaId;
+    _onSpanClick = (carId) => window.location.href = '/Home/BookCar/' + carId;
+</script>

@@ -1,0 +1,552 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+    --header-height: 3.5rem;
+    --first-hue: 250;
+    --sat: 66%;
+    --lig: 75%;
+    --second-hue: 219;
+    --first-color: hsl(var(--first-hue), var(--sat), var(--lig));
+    --first-color-alt: hsl(var(--first-hue), var(--sat), 71%);
+    --title-color: hsl(var(--second-hue), 15%, 95%);
+    --text-color: hsl(var(--second-hue), 8%, 75%);
+    --text-color-light: hsl(var(--second-hue), 4%, 55%);
+    --body-color: hsl(var(--second-hue), 48%, 8%);
+    --container-color: hsl(var(--second-hue), 32%, 13%);
+    --body-font: 'Poppins', sans-serif;
+    --biggest-font-size: 1.75rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+    --smaller-font-size: .75rem;
+    --tiny-font-size: .625rem;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+
+body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: .4s;
+}
+
+h1, h2, h3 {
+    color: var(--title-color);
+    font-weight: var(--font-semibold);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.main {
+    overflow: hidden;
+}
+
+.section {
+    padding: 4.5rem 0 1rem;
+}
+
+.section__title,
+.section__subtitle {
+    text-align: center;
+}
+
+.section__title {
+    font-size: var(--h2-font-size);
+    color: var(--first-color);
+    margin-bottom: 2rem;
+}
+
+.section__subtitle {
+    display: block;
+    font-size: var(--smaller-font-size);
+    color: var(--text-color-light);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--body-color);
+    z-index: var(--z-fixed);
+}
+
+.nav {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    color: var(--first-color);
+    font-weight: var(--font-medium);
+    transition: .4s;
+}
+
+.nav__logo:hover {
+    color: var(--first-color-alt);
+}
+
+.nav__menu {
+    position: fixed;
+    bottom: 1rem;
+    background-color: hsla(var(--second-hue), 32%, 16%, .8);
+    width: 90%;
+    border-radius: 4rem;
+    padding: 1rem 2.25rem;
+    backdrop-filter: blur(10px);
+}
+
+.nav__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__link {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    padding: .4rem;
+    display: flex;
+    border-radius: 5rem;
+}
+
+.active-link {
+    background: linear-gradient(180deg, hsla(var(--first-hue), var(--sat), var(--lig), 1), hsla(var(--first-hue), var(--sat), var(--lig), .2));
+    box-shadow: 0 0 16px hsla(var(--first-hue), var(--sat), var(--lig), .4);
+}
+
+.home__container {
+    position: relative;
+    row-gap: 4.5rem;
+    padding-top: 2rem;
+}
+
+.home__data {
+    text-align: center;
+}
+
+.home__greeting,
+.home__education {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+}
+
+.home__greeting {
+    font-size: var(--small-font-size);
+    display: block;
+    color: var(--title-color);
+    margin-bottom: .25rem;
+}
+
+.home__education {
+    color: var(--text-color);
+    margin-bottom: 2.5rem;
+}
+
+.home__name {
+    font-size: var(--biggest-font-size);
+    margin-bottom: 2.5rem;
+}
+
+.home__img {
+    width: 700px;
+}
+
+.home__handle {
+    display: flex;
+    justify-self: center;
+    background: linear-gradient(180deg, hsla(var(--first-hue), var(--sat), var(--lig), 1), hsla(var(--first-hue), var(--sat), var(--lig), .2));
+    border-radius: 6rem 6rem 2rem 2rem;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.home__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.home__social,
+.home__scroll-right,
+.home__scroll-left {
+    position: absolute;
+}
+
+.home__scroll-right {
+    color: var(--first-color);
+    right: -1.5rem;
+    bottom: 10rem;
+    display: grid;
+    row-gap: 2.4rem;
+    justify-items: center;
+}
+
+.home__scroll-left {
+    color: var(--first-color);
+    left: -1.5rem;
+    bottom: 10rem;
+    display: grid;
+    row-gap: 2.4rem;
+    justify-items: center;
+}
+
+.home__scroll-icon {
+    font-size: 1.25rem;
+}
+
+.home__scroll-text {
+    font-size: var(--smaller-font-size);
+    transform: rotate(-90deg);
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--first-color);
+    color: var(--body-color);
+    padding: .75rem 1rem;
+    border-radius: .5rem;
+    font-weight: var(--font-medium);
+    transition: .4s;
+}
+
+.button:hover {
+    background-color: var(--first-color-alt);
+    color: var(--body-color);
+}
+
+.button--ghost {
+    background-color: transparent;
+    border: 2px solid var(--first-color);
+    color: var(--first-color);
+}
+
+.all_cars__container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding-top: 1rem;
+}
+
+.all_cars__card {
+    background-color: var(--container-color);
+    padding: 3rem 1.5rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.all_cars__title {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+}
+
+.all_cars__img {
+    border-radius: .5rem;
+}
+
+.nearest_car__form-div {
+    position: relative;
+    height: 4rem;
+}
+
+.nearest_car__form-select {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%;
+    border: 2px solid var(--text-color-light);
+    background: none;
+    color: var(--text-color);
+    outline: none;
+    padding: 1.5rem;
+    border-radius: .75rem;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.nearest_car__form-tag {
+    position: absolute;
+    left: 26rem;
+    bottom: 4.4rem;
+    padding: 0 5px;
+    font-size: var(--smaller-font-size);
+    background-color: var(--body-color);
+    z-index: 10;
+}
+
+.nearest_car__form-area {
+    height: 5rem;
+}
+
+.nearest_car__title {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: var(--h3-font-size);
+}
+
+.nearest_car__container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    min-height: 25rem;
+}
+
+.nearest_car__card {
+    height: 20rem;
+    width: 20rem;
+    padding: 3rem 1.5rem 1.5rem;
+    text-align: center;
+}
+
+.nearest_car__card-img {
+    border-radius: .75rem;
+}
+
+.nearest_car__card-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+    margin-bottom: 2rem;
+}
+
+.nearest_car__card-speed,
+.nearest_car__card-year,
+.nearest_car__card-price {
+    background-color: var(--container-color);
+    border-radius: .75rem;
+    padding: .75rem .5rem;
+}
+
+.nearest_car__card-icon {
+    display: block;
+    height: 1.5rem;
+    font-size: 1.25rem;
+    color: var(--first-color);
+    margin-bottom: .25rem;
+}
+
+.nearest_car__card-title {
+    font-size: var(--h3-font-size);
+    color: var(--first-color);
+    font-weight: var(--font-medium);
+    transition: .4s;
+    margin-bottom: 0.5rem;
+}
+
+.nearest_car__card-title:hover {
+    color: var(--first-color-alt);
+}
+
+.nearest_car__card-span {
+    font-size: var(--smaller-font-size);
+}
+
+.footer {
+    background-color: var(--first-color);
+}
+
+.footer__container {
+    padding: 2rem 0;
+}
+
+.footer__title {
+    font-size: var(--h3-font-size);
+    color: var(--body-color);
+    text-align: center;
+}
+
+.footer__copy {
+    display: block;
+    color: var(--container-color);
+    text-align: center;
+    font-size: var(--smaller-font-size);
+    padding-bottom: 1rem;
+}
+
+::-webkit-scrollbar {
+    width: .6rem;
+    border-radius: .5rem;
+    background-color: hsl(var(--second-hue), 8%, 38%);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background-color: hsl(var(--second-hue), 8%, 26%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--second-hue), 8%, 20%);
+}
+
+.nearest_car__areas-img {
+    width: 35%;
+    border-radius: 3rem;
+}
+
+.nearest_car__areas {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-self: center;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.nearest_car__card-title:hover .nearest_car__card-title_icon {
+    transform: translateX(.25rem);
+}
+
+.nearest_car__card-title_icon {
+    font-size: 1rem;
+    transition: .4s;
+}
+
+.nearest_car__card-title-pointer:hover {
+    cursor: pointer;
+}
+
+.book__container {
+    padding-bottom: 3rem;
+}
+
+.book__title {
+    text-align: center;
+    font-size: var(--h2-font-size);
+    margin-bottom: 1.5rem;
+}
+
+.book__form-div {
+    position: relative;
+    margin-bottom: 1rem;
+    height: 4rem;
+}
+
+.book__form-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--text-color-light);
+    background: none;
+    color: var(--text-color);
+    outline: none;
+    padding: 1.5rem;
+    border-radius: .75rem;
+    z-index: 1;
+}
+
+.book__form-tag {
+    position: absolute;
+    top: -.75rem;
+    left: 1.25rem;
+    font-size: var(--smaller-font-size);
+    padding: .25rem;
+    background-color: var(--container-color);
+    z-index: 10;
+}
+
+.book__form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40rem;
+    background-color: var(--container-color);
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+.book__img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30rem;
+    margin-bottom: 1.5rem;
+    border-radius: 2rem;
+}
+
+.book__form-subtitle-first,
+.book__form-subtitle {
+    font-size: var(--h3-font-size);
+    margin-bottom: 1rem;
+}
+
+.book__form-subtitle {
+    margin-top: 1rem;
+}
+
+.book__form-select,
+.book__form-select-disabled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--text-color-light);
+    background: none;
+    color: var(--text-color);
+    outline: none;
+    padding: 1.25rem;
+    border-radius: .75rem;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.book__form-select-disabled {
+    cursor: not-allowed;
+}

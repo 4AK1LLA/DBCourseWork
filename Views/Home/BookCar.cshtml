@@ -1,0 +1,93 @@
+﻿@using CarRental.Models.DTO
+@{
+    Layout = "~/Views/_Layout.cshtml";
+    int carId = ViewBag.Car.CarId;
+}
+<main class="main">
+    <section class="book section" id="book">
+        <div class="book__container container grid">
+            <div class="book__content">
+                <h2 class="book__title">Оформлення замовлення на авто @ViewBag.Car.Brand @ViewBag.Car.Model</h2>
+                <img class="book__img" src="@ViewBag.Car.Photo.URL" />
+                @using (Html.BeginForm("SubmitOrder", "Home", FormMethod.Post, new { @class = "book__form" }))
+                {
+                    @Html.Hidden("carId", carId)
+                    <h3 class="book__form-subtitle-first">Характеристики авто, яке ви замовляєте</h3>
+                    <div class="book__form-about">
+                        Фірма-виробник: <b>@ViewBag.Car.Brand</b><br />
+                        Модель: <b>@ViewBag.Car.Model</b><br />
+                        Модельний рік: <b>@ViewBag.Car.Year</b><br />
+                        Максимальна швидкість: <b>@ViewBag.Car.MaxSpeed км/г</b><br />
+                        Тип кузову: <b>@ViewBag.Car.Category</b><br />
+                        Ціна за добу: <b>@ViewBag.Car.Price$</b><br />
+                    </div>
+                    <h3 class="book__form-subtitle">Ваші особисті дані</h3>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">ПІБ</label>
+                        <input id="driverName" name="driverName" type="text" class="book__form-input" placeholder="Введіть ваше ПІБ">
+                    </div>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">Посвідчення водія</label>
+                        <input id="drivingLicense" name="drivingLicense" type="text" class="book__form-input" placeholder="Введіть ваше посвідчення водія у форматі XXX000000">
+                    </div>
+                    <h3 class="book__form-subtitle">Ваша банківська карта</h3>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">Номер карти</label>
+                        <input id="cardNumber" name="cardNumber" type="text" class="book__form-input" placeholder="Введіть номер вашої карти без пропусків">
+                    </div>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">Термін дії карти</label>
+                        <input id="validity" name="validity" type="text" class="book__form-input" placeholder="Введіть термін дії вашої карти у форматі MM/ДД">
+                    </div>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">CVC</label>
+                        <input id="cvc" name="cvc" type="text" class="book__form-input" placeholder="Введіть CVC вашої карти">
+                    </div>
+                    <h3 class="book__form-subtitle">Шлях та кілометраж</h3>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">Район виїзду</label>
+                        <select id="departureId" name="departureId" class="book__form-select-disabled">
+                            @if (ViewBag.Car.CurrentLocation.Name == ViewBag.Car.CurrentLocation.City)
+                            {
+                                <option selected value="@ViewBag.Car.CurrentLocation.AreaId">
+                                    м. @ViewBag.Car.CurrentLocation.Name
+                                </option>
+                            }
+                            else
+                            {
+                                <option selected value="@ViewBag.Car.CurrentLocation.AreaId">
+                                    @ViewBag.Car.CurrentLocation.Name, м. @ViewBag.Car.CurrentLocation.City
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">Район прибуття</label>
+                        <select id="destinationId" name="destinationId" class="book__form-select">
+                            <option selected disabled value="0"></option>
+                            @foreach (var area in ViewBag.Areas)
+                            {
+                                if (ViewBag.Car.CurrentLocation.AreaId != area.AreaId)
+                                {
+                                    if (area.Name == area.City)
+                                    {
+                                        <option value="@area.AreaId">м. @area.City</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@area.AreaId">@area.Name, м. @area.City</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="book__form-div">
+                        <label for="" class="book__form-tag">Приблизний кілометраж</label>
+                        <input id="kilometrage" name="kilometrage" type="text" class="book__form-input" placeholder="Введіть приблизний кілометраж який ви плануєте проїхати">
+                    </div>
+                    <button class="button" id="btnOrder" type="submit"><b>Замовити</b></button>
+                }
+            </div>
+        </div>
+    </section>
+</main>

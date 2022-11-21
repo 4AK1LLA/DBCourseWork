@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<main class="main">
+    <section class="home section" id="home">
+        <div class="home__container container grid">
+            <div class="home__data">
+                <span class="home__greeting">Вас вітає пункт прокату розкішних авто</span>
+                <h1 class="home__name">Kyiv Luxury Rentals</h1>
+                <div class="home__buttons">
+                    <a href="/Home/NearestCar/0" class="button button--ghost">Найближче вільне авто</a>
+                    <a href="/Home/Index#all_cars" class="button">Всі авто</a>
+                </div>
+            </div>
+            <div class="home__handle">
+                <img src="https://westcoastluxuryrentals.com/wp-content/uploads/2020/11/West-Coast-Luxury-Car-Rental-in-Los-Angeles-1110x577.jpg" alt="" class="home__img">
+            </div>
+            <a href="#all_cars" class="home__scroll-left">
+                <i class='bx bx-mouse home__scroll-icon'></i>
+                <span class="home__scroll-text">Прокрутіть вниз</span>
+            </a>
+            <a href="#all_cars" class="home__scroll-right">
+                <i class='bx bx-mouse home__scroll-icon'></i>
+                <span class="home__scroll-text">Прокрутіть вниз</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="all_cars section" id="all_cars">
+        <h2 class="section__title">Всі наші авто</h2>
+        <div class="all_cars__container container grid">
+            @foreach (var car in ViewBag.CarViewModels)
+            {
+                <div class="all_cars__card">
+                    <h3 class="all_cars__title">@car.Brand <br> @car.Model</h3>
+                    <img class="all_cars__img" src="@car.PhotoURL">
+                </div>
+            }
+        </div>
+    </section>
+</main>
+@if (ViewBag.WasRedirected != null && ViewBag.WasRedirected)
+{
+    <script>
+        alert("Дякуємо за замовлення!");
+    </script>
+}
